@@ -39,3 +39,50 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# =========================
+# Python / AI Specific
+# =========================
+
+# Python virtual environment
+# Never commit your virtual environment folder
+/venv/
+/env/
+/.venv/
+/.env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Large data files and trained models
+# These should be stored elsewhere (like cloud storage) and not in Git
+# Add any large data folders you create here
+/data/
+/models/
+*.pkl
+*.h5
+*.pth
+*.pt
+*.onnx

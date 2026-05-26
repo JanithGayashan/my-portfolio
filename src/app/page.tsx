@@ -1,6 +1,6 @@
 // src/app/page.tsx
-
 import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
@@ -9,36 +9,31 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  return (
-    // We remove all padding and container logic from the main tag.
-    // Each section will now be full-width.
-    <main className="flex flex-col"> 
-      <Navbar />
+  return (    
+    <main className="flex flex-col bg-background selection:bg-primary/30 selection:text-secondary"> 
+      <Navbar />    
+            
+      <section id="home" className="min-h-screen w-full flex items-center justify-center">
+        <Hero />
+      </section>
 
-      {/* 
-        Each section is now a full-screen container.
-        - min-h-screen: Makes the section at least as tall as the screen.
-        - flex, items-center, justify-center: Vertically and horizontally centers the content.
-        - scroll-mt-24: Corrects the scroll position because of the sticky navbar.
-      */}
-
-      <section id="about" className="min-h-screen flex items-center justify-center scroll-mt-24">
+      <section id="about" className="min-h-screen w-full flex items-center justify-center scroll-mt-24">
         <About />
       </section>
 
-      <section id="experience" className="min-h-screen flex items-center justify-center scroll-mt-24 bg-gray-800">
+      <section id="experience" className="min-h-screen w-full flex items-center justify-center scroll-mt-24 bg-surface/30">
         <Experience />
       </section>
 
-      <section id="skills" className="min-h-screen flex items-center justify-center scroll-mt-24">
+      <section id="skills" className="min-h-screen w-full flex items-center justify-center scroll-mt-24">
         <Skills />
       </section>
       
-      <section id="projects" className="min-h-screen flex items-center justify-center scroll-mt-24 bg-gray-800">
+      <section id="projects" className="min-h-screen w-full flex items-center justify-center scroll-mt-24 bg-surface/30">
         <Projects />
       </section>
       
-      <section id="contact" className="min-h-screen flex items-center justify-center scroll-mt-24">
+      <section id="contact" className="min-h-screen w-full flex items-center justify-center scroll-mt-24">
         <Contact />
       </section>
 

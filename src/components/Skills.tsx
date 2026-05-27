@@ -46,7 +46,7 @@ export default function Skills() {
           My Skills
         </h2>
         <p className="text-center text-gray-500 mb-16 text-sm sm:text-base font-mono">
-          // Core technologies and architectures engineered in my terminal
+          {"// Core technologies and architectures engineered in my terminal"}
         </p>
 
         {/* Dynamic Staggered Responsive Grid */}

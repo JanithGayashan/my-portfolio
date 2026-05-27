@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function Projects() {
   const portfolioProjects = [
     {
-      title: "Site Builder Engine",
+      title: "AI-Powered Website Builder",
       description: "Full-Stack LLM Orchestration generating web code from chat intent.",
       tag: "WEB SYSTEM",
       demo: "#",
@@ -63,12 +63,12 @@ export default function Projects() {
                                 [Screenshot: {project.image}]
                             </div>
                             {/* Uncomment the Image component once your images are in the public folder */}
-                            {/* <Image 
+                            <Image 
                                 src={project.image} 
                                 alt={project.title} 
                                 fill 
                                 className="object-cover transform group-hover:scale-105 transition duration-700 z-10"
-                            /> */}
+                            />
                         </div>
 
                         {/* Bottom Actions Row */}

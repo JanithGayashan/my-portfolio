@@ -15,7 +15,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Janith Gayashan - AI/ML Engineer",
+  title: "Janith Gayashan | AI Engineer",
   description: "My personal portfolio showcasing projects in AI and software development.",
 };
 

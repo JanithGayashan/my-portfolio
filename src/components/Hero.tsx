@@ -4,10 +4,12 @@ import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image"; // Added Next.js Image component
+import { FaGithub, FaLinkedin, FaKaggle } from "react-icons/fa";
+import { SiHuggingface } from "react-icons/si";
 
 // Native Typewriter implementation engineered for React 19 stability
 function TypewriterEffect() {
-  const words = ['Machine Learning Systems', 'Agentic AI Workflows', 'FastAPI Backend Architectures', 'LangGraph Solutions'];
+  const words = ['Machine Learning Systems', 'Agentic AI Workflows', 'Computer Vision Systems', 'FastAPI Backend Architectures', 'LangGraph Solutions'];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -98,6 +100,45 @@ export default function Hero() {
               Get In Touch
             </Link>
           </div>
+
+          {/* Social Links */}
+<div className="flex items-center gap-6 mt-8">
+    <a 
+        href="https://github.com/JanithGayashan" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
+    >
+        <FaGithub size={28} />
+    </a>
+    
+    <a 
+        href="https://www.linkedin.com/in/janith-gayashan/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-gray-400 hover:text-secondary transition-colors duration-300 transform hover:scale-110"
+    >
+        <FaLinkedin size={28} />
+    </a>
+
+    <a 
+        href="https://www.kaggle.com/janithgayashan" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
+    >
+        <FaKaggle size={26} /> 
+    </a>
+
+    <a 
+        href="https://huggingface.co/JanithGayashan" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-gray-400 hover:text-secondary transition-colors duration-300 transform hover:scale-110"
+    >
+        <SiHuggingface size={28} />
+    </a>
+</div>
         </motion.div>
 
         {/* Right Layout Container: Cyber Glass Profile Silhouette Frame */}

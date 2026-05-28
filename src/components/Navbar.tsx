@@ -34,7 +34,10 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center px-6 md:px-12">
         
         {/* Upgraded Logo: Uses your initials with the theme's gradient */}
-        <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-display cursor-pointer tracking-tighter">
+        {/* <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-display cursor-pointer tracking-tighter">
+          Janith Gayashan
+        </div> */}
+        <div className="text-2xl font-black text-gray-100 hover:text-white transition-colors duration-300 font-display cursor-pointer tracking-tight">
           Janith Gayashan
         </div>
         

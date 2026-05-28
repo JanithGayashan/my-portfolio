@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Projects() {
   const portfolioProjects = [
@@ -10,7 +11,7 @@ export default function Projects() {
       title: "AI-Powered Website Builder",
       description: "Full-Stack LLM Orchestration generating web code from chat intent.",
       tag: "WEB SYSTEM",
-      demo: "#",
+      demo: "/projects/website-builder", // Updated to a real route
       github: "https://github.com/JanithGayashan",
       image: "/project-builder.jpg", 
     },
@@ -18,7 +19,7 @@ export default function Projects() {
       title: "GAB-Net Research",
       description: "Explainable imitation learning architecture for autonomous driving.",
       tag: "ML RESEARCH",
-      demo: "#",
+      demo: "/projects/gab-net", // Updated to a real route
       github: "https://github.com/JanithGayashan",
       image: "/project-gabnet.jpg", 
     },
@@ -26,14 +27,14 @@ export default function Projects() {
       title: "Agentic AI Assistant",
       description: "Enterprise multi-agent workflow for classification and RAG access.",
       tag: "AI WORKFLOW",
-      demo: "#",
+      demo: "/projects/ai-assistant", // Updated to a real route
       github: "https://github.com/JanithGayashan",
       image: "/project-slt.jpg", 
     }
   ];
 
   return (
-    <div className="container mx-auto px-6 py-24">
+    <div id="projects" className="container mx-auto px-6 py-24">
         <Reveal>
             <h2 className="text-4xl font-black text-white text-center mb-16 font-display uppercase tracking-widest">
                 My Projects
@@ -77,10 +78,13 @@ export default function Projects() {
                                 {project.tag}
                             </span>
                             
-                            <a href={project.demo} className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white px-5 py-2 rounded-lg font-bold text-sm transition-all duration-300">
+                            <Link 
+                                href={project.demo} 
+                                className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white px-5 py-2 rounded-lg font-bold text-sm transition-all duration-300"
+                            >
                                 View 
                                 <span className="text-lg leading-none">→</span>
-                            </a>
+                            </Link>
                         </div>
                     </motion.div>
                 ))}

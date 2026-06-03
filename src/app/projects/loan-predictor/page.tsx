@@ -10,7 +10,7 @@ export default function LoanPredictorPage() {
         {/* Clean Navigation Header */}
         <div className="mb-12">
           <Link 
-            href="/" 
+            href="/#projects" 
             className="inline-flex items-center gap-2 text-gray-400 hover:text-primary transition-colors duration-300 font-display uppercase tracking-wider text-sm font-bold"
           >
             <ArrowLeft size={16} />
@@ -21,7 +21,7 @@ export default function LoanPredictorPage() {
         {/* Dashboard Header */}
         <div className="mb-12 text-center md:text-left border-b border-gray-800 pb-8">
           <h1 className="text-4xl md:text-5xl font-black mb-4 font-display text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-            Financial ML Architecture
+            Loan Approval System
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl leading-relaxed">
             A production-grade Decision Tree Classifier simulating real-world financial risk assessment. 

@@ -36,7 +36,7 @@ export default function Projects() {
       image: "/project-slt.jpg",
     },
     {
-      title: "AI Loan Approval System",
+      title: "Loan Approval System",
       description: "Decision Tree Classifier deployed via FastAPI with standard scaled features.",
       tag: "LIVE ML DEMO",
       demo: "/projects/loan-predictor", 

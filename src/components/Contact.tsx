@@ -7,7 +7,7 @@ export default function Contact() {
         <Reveal>
             <h2 className="text-4xl font-black text-white mb-6 font-display">Execute Connection</h2>
             <p className="text-lg text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed">
-                Currently evaluating distributed remote roles bridging US operations with global engineering schedules. My technical terminal is always listening.
+                Open to global collaborations and remote engineering challenges. My technical terminal is always listening.
             </p>
             <div className="flex flex-col items-center gap-4">
                 <a 

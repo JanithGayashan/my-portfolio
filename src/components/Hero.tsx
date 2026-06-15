@@ -159,13 +159,20 @@ export default function Hero() {
               <div className="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
               
               {/* The Actual Photo */}
-              <Image
-                src="/hero-profile.jpg" // Make sure your photo is named this in the public folder
-                alt="Janith Gayashan"
-                fill
-                priority // Tells Next.js to load this image immediately since it's above the fold
-                className="object-cover transform transition duration-700 group-hover:scale-105"
-              />
+              <div className="relative w-full max-w-sm aspect-[4/5] overflow-hidden rounded-2xl">
+  <Image
+    src="/hero-profile.jpg"
+    alt="Janith Gayashan"
+    fill
+    priority
+    sizes="(max-width: 768px) 100vw, 33vw"
+    className="transition duration-700 group-hover:scale-105"
+    style={{ 
+      objectFit: 'cover', 
+      objectPosition: '50% 70%'
+    }}
+  />
+</div>
             </div>
           </div>
         </motion.div>

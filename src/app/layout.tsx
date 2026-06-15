@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
+// 1. IMPORT YOUR NEW FLOATING CHAT COMPONENT
+import FloatingChat from "@/components/FloatingChat";
+
 // Configure the fonts
 const inter = Inter({ 
   subsets: ["latin"],
@@ -27,7 +30,15 @@ export default function RootLayout({
   return (
     // Combine the font variables in the className
     <html lang="en" className={`${inter.variable} ${poppins.variable} !scroll-smooth`}>
-      <body>{children}</body>
+      <body>
+        
+        {/* Your actual page content loads here */}
+        <main>{children}</main>
+
+        {/* 2. INJECT THE GLOBAL CHAT WIDGET HERE */}
+        <FloatingChat />
+        
+      </body>
     </html>
   );
 }

@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import { FaGithub, FaLinkedin, FaKaggle } from "react-icons/fa";
 import { SiHuggingface } from "react-icons/si";
 import { profile } from "@/data/profile";
+import TypewriterHeadline from "@/components/TypewriterHeadline";
 
 const socialLinks = [
   { label: "GitHub", href: profile.socials.github, icon: FaGithub },
@@ -20,7 +20,7 @@ export default function Hero() {
     <div className="relative isolate flex min-h-[100svh] w-full items-center overflow-hidden pb-16 pt-32 md:pb-24 md:pt-36">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 to-secondary/15 blur-[100px] md:h-[700px] md:w-[700px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/30 to-secondary/20 blur-[100px] motion-safe:animate-pulse sm:h-[500px] sm:w-[500px] md:h-[700px] md:w-[700px] md:blur-[160px]"
       />
 
       <div className="container mx-auto flex w-full flex-col items-center justify-between gap-12 px-6 md:flex-row lg:px-12">
@@ -34,9 +34,7 @@ export default function Hero() {
           >
             {profile.name}
           </h1>
-          <p className="mb-6 max-w-xl text-xl font-medium leading-relaxed text-gray-200 sm:text-2xl">
-            Machine learning, AI workflows, and backend development.
-          </p>
+          <TypewriterHeadline />
           <p className="mb-8 max-w-xl text-base leading-relaxed text-gray-400 sm:text-lg">
             {profile.introduction}
           </p>
@@ -45,9 +43,15 @@ export default function Hero() {
             <a href="#projects" className="primary-button w-full sm:w-auto">
               View Projects
             </a>
-            <Link href="/resume" className="secondary-button w-full sm:w-auto">
+            <a
+              href="/Janith_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View résumé (PDF, opens in a new tab)"
+              className="secondary-button w-full sm:w-auto"
+            >
               View Résumé
-            </Link>
+            </a>
             <a href="#contact" className="secondary-button w-full sm:w-auto">
               Contact Me
             </a>

@@ -7,6 +7,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Project routes will be included when their content is reviewed.
   return [
     { url: siteUrl, priority: 1 },
-    { url: `${siteUrl}/resume`, priority: 0.5 },
+    { url: `${siteUrl}/Janith_CV.pdf`, priority: 0.5 },
   ];
 }

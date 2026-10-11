@@ -25,7 +25,7 @@ Preview deployments are marked `noindex`. When no production URL is configured, 
 
 Edit `src/data/profile.ts` to update the name, biography, professional profiles, education, experience, and skills consistently.
 
-The hero and contact section link to `/resume`. The résumé uses the same profile data and includes a Print / Save as PDF button. It currently contains only facts already present in the portfolio; update this data before sharing it as a complete CV.
+The hero and contact section open the owner's original PDF at `/Janith_CV.pdf` in a new tab. The legacy `/resume` address permanently redirects to that PDF; it no longer generates a résumé from the portfolio data. To update the CV, replace `public/Janith_CV.pdf` with the new PDF under the same filename, verify it, and deploy through the normal branch workflow. This file is publicly downloadable, so only publish contact and reference details you intend to share.
 
 ## Quality checks
 

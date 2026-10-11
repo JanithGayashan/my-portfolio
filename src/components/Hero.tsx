@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { FaGithub, FaLinkedin, FaKaggle } from "react-icons/fa";
 import { SiHuggingface } from "react-icons/si";
 import { profile } from "@/data/profile";
@@ -44,9 +43,15 @@ export default function Hero() {
             <a href="#projects" className="primary-button w-full sm:w-auto">
               View Projects
             </a>
-            <Link href="/resume" className="secondary-button w-full sm:w-auto">
+            <a
+              href="/Janith_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View résumé (PDF, opens in a new tab)"
+              className="secondary-button w-full sm:w-auto"
+            >
               View Résumé
-            </Link>
+            </a>
             <a href="#contact" className="secondary-button w-full sm:w-auto">
               Contact Me
             </a>

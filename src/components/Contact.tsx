@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { profile } from "@/data/profile";
 import Reveal from "./Reveal";
 
@@ -17,9 +16,15 @@ export default function Contact() {
           <a href={"mailto:" + profile.email} className="primary-button">
             Send Email
           </a>
-          <Link href="/resume" className="secondary-button">
+          <a
+            href="/Janith_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View résumé (PDF, opens in a new tab)"
+            className="secondary-button"
+          >
             View Résumé
-          </Link>
+          </a>
         </div>
         <p className="mt-6 break-words text-sm text-gray-400">
           <a

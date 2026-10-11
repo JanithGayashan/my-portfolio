@@ -74,20 +74,26 @@ export default function Hero() {
         </div>
 
         <div className="hero-portrait flex w-full justify-center md:w-2/5 md:justify-end">
-          <div className="relative">
+          <div className="relative group">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-primary to-secondary opacity-25 blur"
+              className="pointer-events-none absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-primary to-secondary opacity-30 blur transition duration-1000 group-hover:opacity-50"
             />
-            <div className="relative h-64 w-64 overflow-hidden rounded-2xl border border-gray-700 shadow-2xl sm:h-72 sm:w-72 lg:h-80 lg:w-80">
-              <Image
-                src="/hero-profile.jpg"
-                alt="Portrait of Janith Gayashan"
-                fill
-                preload
-                sizes="(min-width: 1024px) 320px, (min-width: 640px) 288px, 256px"
-                className="object-cover object-[50%_70%]"
+            <div className="relative h-64 w-64 overflow-hidden rounded-2xl border border-gray-800 shadow-2xl sm:h-72 sm:w-72 lg:h-80 lg:w-80">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-10 bg-primary/10 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-0"
               />
+              <div className="relative w-full max-w-sm aspect-[4/5] overflow-hidden rounded-2xl">
+                <Image
+                  src="/hero-profile.jpg"
+                  alt="Portrait of Janith Gayashan"
+                  fill
+                  preload
+                  sizes="(min-width: 1024px) 320px, (min-width: 640px) 288px, 256px"
+                  className="object-cover object-[50%_70%] transition duration-700 group-hover:scale-105"
+                />
+              </div>
             </div>
           </div>
         </div>

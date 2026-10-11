@@ -1,37 +1,40 @@
-// src/components/Experience.tsx
+import { profile } from "@/data/profile";
 import Reveal from "./Reveal";
 
 export default function Experience() {
+  const experience = profile.experience;
+
   return (
-    <div className="container mx-auto px-6 py-24">
-        <Reveal>
-            <h2 className="text-4xl font-bold text-white text-center mb-16 font-display">
-              Professional Footprint
-            </h2>
-            <div className="max-w-3xl mx-auto">
-                <div className="relative border-l border-gray-800 pl-8 ml-4 md:ml-6 group">
-                    <div className="absolute -left-[9px] top-1.5 w-4 h-4 bg-background border-2 border-primary rounded-full group-hover:bg-secondary transition-colors duration-300"></div>
-                    
-                    <h3 className="text-2xl font-bold text-white font-display">AI/ML Engineer Intern</h3>
-                    <p className="text-lg font-medium text-primary mt-1">Sri Lanka Telecom (SLT) | March 2025 – September 2025</p>
-                    
-                    <ul className="list-none text-gray-400 mt-6 space-y-4">
-                        <li className="flex items-start">
-                            <span className="text-primary mr-3 mt-1.5 text-xs">◆</span>
-                            <span>Architected and deployed an end-to-end Agentic AI Assistant using **LangGraph**, **FastAPI**, and production **OpenAI APIs**.</span>
-                        </li>
-                        <li className="flex items-start">
-                            <span className="text-primary mr-3 mt-1.5 text-xs">◆</span>
-                            <span>Designed reactive multi-agent nodes responsible for natural language intent parsing, user personalization routing, and transactional token workflows.</span>
-                        </li>
-                        <li className="flex items-start">
-                            <span className="text-primary mr-3 mt-1.5 text-xs">◆</span>
-                            <span>Constructed an enterprise-level Retrieval-Augmented Generation (RAG) platform mapping highly relational internal models via structural **MySQL** and **MongoDB** instances.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </Reveal>
+    <div className="container mx-auto px-6 py-20 md:py-24">
+      <Reveal>
+        <h2
+          id="experience-heading"
+          className="section-heading mb-12 text-center"
+        >
+          Experience
+        </h2>
+        <article className="relative mx-auto max-w-3xl border-l border-gray-700 pl-6 sm:pl-8">
+          <div
+            aria-hidden="true"
+            className="absolute -left-2 top-1.5 h-4 w-4 rounded-full border-2 border-primary bg-background"
+          />
+          <h3 className="font-display text-xl font-bold text-white sm:text-2xl">
+            {experience.role}
+          </h3>
+          <p className="mt-2 text-lg font-medium text-violet-300">
+            {experience.company}
+          </p>
+          <p className="mt-2 text-sm text-gray-400">
+            <time dateTime="2025-03">{experience.start}</time> –{" "}
+            <time dateTime="2025-09">{experience.end}</time>
+          </p>
+          <ul className="mt-6 list-disc space-y-4 pl-5 leading-relaxed text-gray-300 marker:text-violet-300">
+            {experience.contributions.map((contribution) => (
+              <li key={contribution}>{contribution}</li>
+            ))}
+          </ul>
+        </article>
+      </Reveal>
     </div>
   );
 }

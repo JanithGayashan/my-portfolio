@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { sendChatMessage } from '@/app/projects/services/chatApi';
@@ -21,6 +21,15 @@ const THREAD_KEY = "chat_thread_id";
 const TIME_KEY = "chat_last_activity";
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes
 
+function createGreeting(): Message {
+  return {
+    id: 'welcome',
+    sender: 'bot',
+    text: "Hello. I am Janith's AI Assistant. How can I help you explore his portfolio, technical skills, or machine learning projects today?",
+    timestamp: new Date(),
+  };
+}
+
 export default function ChatWidget({ onClose }: ChatWidgetProps) {
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -31,13 +40,13 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
 
   const generateUniqueId = () => `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
-  // The initial greeting message stored as a constant so we can easily reset to it
-  const INITIAL_GREETING: Message = {
-    id: 'welcome',
-    sender: 'bot',
-    text: "Hello. I am Janith's AI Assistant. How can I help you explore his portfolio, technical skills, or machine learning projects today?",
-    timestamp: new Date(),
-  };
+  const createNewSession = useCallback(() => {
+    const newSessionId = `session_${uuidv4()}`;
+    localStorage.setItem(THREAD_KEY, newSessionId);
+    localStorage.setItem(TIME_KEY, Date.now().toString());
+    setThreadId(newSessionId);
+    setMessages([createGreeting()]);
+  }, []);
 
   useEffect(() => {
     // 1. Initialize Session on Load & Sync Across Tabs
@@ -49,7 +58,7 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
       // If a valid, non-expired session exists, use it!
       if (storedThreadId && lastActivity && (now - parseInt(lastActivity)) < SESSION_TIMEOUT_MS) {
         setThreadId(storedThreadId);
-        setMessages([INITIAL_GREETING]);
+        setMessages([createGreeting()]);
       } else {
         // Otherwise, start a fresh session
         createNewSession();
@@ -62,26 +71,17 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === THREAD_KEY && e.newValue) {
         setThreadId(e.newValue);
-        setMessages([INITIAL_GREETING]); // Reset to initial greeting automatically
+        setMessages([createGreeting()]); // Reset to initial greeting automatically
       }
     };
 
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+  }, [createNewSession]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
-
-  // Helper to Create a Fresh Session
-  const createNewSession = () => {
-    const newSessionId = `session_${uuidv4()}`;
-    localStorage.setItem(THREAD_KEY, newSessionId);
-    localStorage.setItem(TIME_KEY, Date.now().toString());
-    setThreadId(newSessionId);
-    setMessages([INITIAL_GREETING]);
-  };
 
   // --- UPGRADED: The Session Reset Logic ---
   const handleNewChat = () => {
@@ -143,7 +143,7 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
         }, 800);
       }
 
-    } catch (error: any) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         {

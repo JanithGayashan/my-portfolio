@@ -3,8 +3,38 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  .hero-intro {
+    animation: enter 650ms ease-out both;
+  }
+  .hero-portrait {
+    animation: enter 650ms ease-out 100ms both;
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @layer base {
@@ -14,6 +44,52 @@ html {
 
   ::selection {
     @apply bg-primary/30 text-secondary;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-4 outline-violet-300;
+  }
+}
+
+@layer components {
+  .primary-button {
+    @apply inline-flex min-h-12 items-center justify-center rounded-xl bg-violet-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-violet-600;
+  }
+  .secondary-button {
+    @apply inline-flex min-h-12 items-center justify-center rounded-xl border border-gray-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-surface;
+  }
+  .section-heading {
+    @apply font-display text-3xl font-bold text-white sm:text-4xl;
+  }
+  .skip-link {
+    @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-white px-4 py-3 font-semibold text-background focus:translate-y-0;
+  }
+}
+
+@media print {
+  @page {
+    margin: 18mm;
+  }
+  .skip-link,
+  .print-hidden {
+    display: none !important;
+  }
+  body:has(.resume-page),
+  .resume-page {
+    background: white !important;
+    color: #111827 !important;
+  }
+  .resume-page {
+    padding: 0 !important;
+  }
+  .resume-page * {
+    color: inherit !important;
+  }
+  .resume-page a {
+    text-decoration: none;
+  }
+  .resume-page section {
+    break-inside: avoid;
   }
 }
 

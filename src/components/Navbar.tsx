@@ -1,66 +1,112 @@
-// src/components/Navbar.tsx
 "use client";
 
-import { Link } from "react-scroll";
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { Menu, X } from "lucide-react";
+import { profile } from "@/data/profile";
+
+const navLinks = [
+  { title: "Home", href: "#home" },
+  { title: "About", href: "#about" },
+  { title: "Experience", href: "#experience" },
+  { title: "Skills", href: "#skills" },
+  { title: "Projects", href: "#projects" },
+  { title: "Contact", href: "#contact" },
+] as const;
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef<HTMLDetailsElement>(null);
+  const toggleRef = useRef<HTMLElement>(null);
 
-  // This listener makes the navbar transparent at the top, and glass-like when you scroll down
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && menuRef.current?.open) {
+        menuRef.current.open = false;
+        toggleRef.current?.focus();
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !menuRef.current?.contains(event.target)
+      ) {
+        if (menuRef.current) menuRef.current.open = false;
+      }
+    };
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches && menuRef.current) menuRef.current.open = false;
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+      desktop.removeEventListener("change", closeOnDesktop);
+    };
   }, []);
 
-  const navLinks = [
-    { title: "Home", path: "home" },
-    { title: "About", path: "about" },
-    { title: "Experience", path: "experience" },
-    { title: "Skills", path: "skills" },
-    { title: "Projects", path: "projects" },
-    { title: "Contact", path: "contact" },
-  ];
-
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      scrolled 
-        ? "bg-background/80 backdrop-blur-md border-b border-primary/20 shadow-lg shadow-primary/5 py-4" 
-        : "bg-transparent py-6"
-    }`}>
-      <div className="container mx-auto flex justify-between items-center px-6 md:px-12">
-        
-        {/* Upgraded Logo: Uses your initials with the theme's gradient */}
-        {/* <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-display cursor-pointer tracking-tighter">
-          Janith Gayashan
-        </div> */}
-        <div className="text-2xl font-black text-gray-100 hover:text-white transition-colors duration-300 font-display cursor-pointer tracking-tight">
-          Janith Gayashan
-        </div>
-        
-        <div className="hidden md:flex space-x-8">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-800 bg-background/95 backdrop-blur-md">
+      <nav
+        aria-label="Primary navigation"
+        className="container mx-auto flex min-h-20 items-center justify-between gap-4 px-6 lg:px-12"
+      >
+        <a
+          href="#home"
+          className="rounded-md font-display text-lg font-bold tracking-tight text-white sm:text-2xl"
+        >
+          {profile.name}
+        </a>
+
+        <ul className="hidden items-center gap-6 lg:flex">
           {navLinks.map((link) => (
-            <Link
-              key={link.title}
-              to={link.path}
-              spy={true}
-              smooth={true}
-              offset={-80}
-              duration={500}
-              className="cursor-pointer text-sm font-semibold text-gray-400 hover:text-white transition-colors duration-300 relative group font-display tracking-wide uppercase"
-              activeClass="!text-white"
-            >
-              {link.title}
-              {/* This creates a sleek, animated neon line under the link when hovered */}
-              <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full group-[.active]:w-full"></span>
-            </Link>
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="inline-flex min-h-11 items-center rounded-md text-sm font-medium text-gray-300 transition-colors hover:text-white"
+              >
+                {link.title}
+              </a>
+            </li>
           ))}
-        </div>
-        
-      </div>
-    </nav>
+        </ul>
+
+        <details ref={menuRef} className="group relative lg:hidden">
+          <summary
+            ref={toggleRef}
+            aria-controls="mobile-navigation"
+            className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg border border-gray-700 px-3 text-sm text-white [&::-webkit-details-marker]:hidden"
+          >
+            <Menu aria-hidden="true" size={20} className="group-open:hidden" />
+            <X
+              aria-hidden="true"
+              size={20}
+              className="hidden group-open:block"
+            />
+            Menu
+          </summary>
+          <ul
+            id="mobile-navigation"
+            className="absolute right-0 top-full mt-3 w-60 max-w-[calc(100vw-3rem)] rounded-xl border border-gray-700 bg-surface p-2 shadow-xl"
+          >
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={() => {
+                    if (menuRef.current) menuRef.current.open = false;
+                  }}
+                  className="flex min-h-11 items-center rounded-lg px-4 py-3 text-gray-200 transition-colors hover:bg-surfaceHover hover:text-white"
+                >
+                  {link.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </nav>
+    </header>
   );
 }

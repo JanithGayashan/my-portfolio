@@ -1,19 +1,32 @@
-// src/components/About.tsx
+import { profile } from "@/data/profile";
 import Reveal from "./Reveal";
 
 export default function About() {
   return (
-    
-    <div className="container px-4 text-center">
-        <Reveal>
-            <h2 className="text-4xl font-bold text-white text-center mb-8 font-display">About Me</h2>
-            <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                I am an undergraduate specializing in Artificial Intelligence at the University of Moratuwa, with practical
-                experience in AI and ML projects. Skilled in developing innovative solutions and collaborating effectively
-                in teams, I am seeking opportunities to apply and expand my ML and AI development skills, embracing
-                challenges for growth in the rapidly evolving field of AI.
-            </p>
-        </Reveal>
+    <div className="container mx-auto px-6 py-20 text-center md:py-24">
+      <Reveal>
+        <h2 id="about-heading" className="section-heading mb-8">
+          About Me
+        </h2>
+        <div className="mx-auto max-w-3xl space-y-5 text-base leading-relaxed text-gray-300 sm:text-lg">
+          <p>
+            I am an undergraduate specializing in Artificial Intelligence at the{" "}
+            {profile.education.institution}. My work brings together machine
+            learning, agent workflows, and web development using Python,
+            FastAPI, PyTorch, and Next.js.
+          </p>
+          <p>
+            During my AI/ML engineering internship at Sri Lanka Telecom, I
+            worked on agentic AI assistants and retrieval-augmented generation.
+            I enjoy turning an idea into a working application and collaborating
+            with others to solve practical problems.
+          </p>
+          <p>
+            I am seeking opportunities in AI/ML and backend engineering where I
+            can contribute and continue learning.
+          </p>
+        </div>
+      </Reveal>
     </div>
   );
 }

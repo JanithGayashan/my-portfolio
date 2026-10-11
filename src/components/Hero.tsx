@@ -1,183 +1,97 @@
-// src/components/Hero.tsx
-"use client";
-import { Link } from "react-scroll";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import Image from "next/image"; // Added Next.js Image component
+import Image from "next/image";
+import Link from "next/link";
 import { FaGithub, FaLinkedin, FaKaggle } from "react-icons/fa";
 import { SiHuggingface } from "react-icons/si";
+import { profile } from "@/data/profile";
 
-// Native Typewriter implementation engineered for React 19 stability
-function TypewriterEffect() {
-  const words = ['Machine Learning Systems', 'Agentic AI Workflows', 'Computer Vision Systems', 'FastAPI Backend Architectures', 'LangGraph Solutions'];
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(100);
-
-  useEffect(() => {
-    const handleTyping = () => {
-      const fullWord = words[currentWordIndex];
-      
-      if (!isDeleting) {
-        setCurrentText(fullWord.substring(0, currentText.length + 1));
-        if (currentText === fullWord) {
-          setTypingSpeed(2000); // Wait at full word
-          setIsDeleting(true);
-        } else {
-          setTypingSpeed(70);
-        }
-      } else {
-        setCurrentText(fullWord.substring(0, currentText.length - 1));
-        if (currentText === "") {
-          setIsDeleting(false);
-          setCurrentWordIndex((prev) => (prev + 1) % words.length);
-          setTypingSpeed(500); // Pause before next word
-        } else {
-          setTypingSpeed(40);
-        }
-      }
-    };
-
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentWordIndex, typingSpeed]);
-
-  return (
-    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary min-h-[40px] block">
-      {currentText}
-      <span className="text-secondary animate-pulse ml-1">|</span>
-    </span>
-  );
-}
+const socialLinks = [
+  { label: "GitHub", href: profile.socials.github, icon: FaGithub },
+  { label: "LinkedIn", href: profile.socials.linkedin, icon: FaLinkedin },
+  { label: "Kaggle", href: profile.socials.kaggle, icon: FaKaggle },
+  {
+    label: "Hugging Face",
+    href: profile.socials.huggingface,
+    icon: SiHuggingface,
+  },
+] as const;
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden py-20">
-      
-      {/* Dynamic Ambient Gradient Blob Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] md:w-[700px] h-[300px] sm:h-[500px] md:h-[700px] bg-gradient-to-tr from-primary/30 to-secondary/20 rounded-full blur-[100px] md:blur-[160px] animate-pulse -z-10"></div>
+    <div className="relative isolate flex min-h-[100svh] w-full items-center overflow-hidden pb-16 pt-32 md:pb-24 md:pt-36">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 to-secondary/15 blur-[100px] md:h-[700px] md:w-[700px]"
+      />
 
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 z-10 w-full">
-        
-        {/* Left Layout Container: Technical Titles */}
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="w-full md:w-3/5 text-left flex flex-col justify-center"
-        >
-          <h2 className="text-secondary font-bold text-sm sm:text-base mb-4 tracking-widest uppercase font-display">
-            ⚡ AI Engineer
-          </h2>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 font-display leading-tight">
-            Janith Gayashan
+      <div className="container mx-auto flex w-full flex-col items-center justify-between gap-12 px-6 md:flex-row lg:px-12">
+        <div className="hero-intro w-full md:w-3/5">
+          <p className="mb-4 font-display text-sm font-semibold uppercase tracking-widest text-secondary sm:text-base">
+            {profile.role}
+          </p>
+          <h1
+            id="home-heading"
+            className="mb-5 font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl"
+          >
+            {profile.name}
           </h1>
-          
-          <div className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-300 mb-6 h-[40px]">
-            <TypewriterEffect />
-          </div>
-
-          <p className="text-gray-400 max-w-xl text-base sm:text-lg mb-8 leading-relaxed">
-            Specializing in scalable intelligence, multi-agent frameworks, and high-performance backend pipelines. Transforming algorithmic concepts into production systems.
+          <p className="mb-6 max-w-xl text-xl font-medium leading-relaxed text-gray-200 sm:text-2xl">
+            Machine learning, AI workflows, and backend development.
+          </p>
+          <p className="mb-8 max-w-xl text-base leading-relaxed text-gray-400 sm:text-lg">
+            {profile.introduction}
           </p>
 
-          <div className="flex flex-wrap gap-4">
-            <Link 
-              to="projects" 
-              smooth={true} 
-              offset={-80} 
-              className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-3.5 rounded-xl font-bold cursor-pointer hover:opacity-90 transition shadow-lg shadow-primary/20 text-center w-full sm:w-auto"
-            >
-              View System Architecture
+          <div className="flex flex-wrap gap-3">
+            <a href="#projects" className="primary-button w-full sm:w-auto">
+              View Projects
+            </a>
+            <Link href="/resume" className="secondary-button w-full sm:w-auto">
+              View Résumé
             </Link>
-            <Link 
-              to="contact" 
-              smooth={true} 
-              offset={-80} 
-              className="border border-gray-700 text-white px-8 py-3.5 rounded-xl font-bold cursor-pointer hover:bg-surface transition text-center w-full sm:w-auto"
-            >
-              Get In Touch
-            </Link>
+            <a href="#contact" className="secondary-button w-full sm:w-auto">
+              Contact Me
+            </a>
           </div>
 
-          {/* Social Links */}
-<div className="flex items-center gap-6 mt-8">
-    <a 
-        href="https://github.com/JanithGayashan" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
-    >
-        <FaGithub size={28} />
-    </a>
-    
-    <a 
-        href="https://www.linkedin.com/in/janith-gayashan/" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="text-gray-400 hover:text-secondary transition-colors duration-300 transform hover:scale-110"
-    >
-        <FaLinkedin size={28} />
-    </a>
+          <ul
+            aria-label="Professional profiles"
+            className="mt-8 flex items-center gap-3"
+          >
+            {socialLinks.map(({ label, href, icon: Icon }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label + " profile (opens in a new tab)"}
+                  className="flex h-11 w-11 items-center justify-center rounded-lg text-gray-300 transition-colors hover:bg-surface hover:text-white"
+                >
+                  <Icon size={25} aria-hidden="true" focusable="false" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-    <a 
-        href="https://www.kaggle.com/janithgayashan" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110"
-    >
-        <FaKaggle size={26} /> 
-    </a>
-
-    <a 
-        href="https://huggingface.co/JanithGayashan" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="text-gray-400 hover:text-secondary transition-colors duration-300 transform hover:scale-110"
-    >
-        <SiHuggingface size={28} />
-    </a>
-</div>
-        </motion.div>
-
-        {/* Right Layout Container: Cyber Glass Profile Silhouette Frame */}
-        <motion.div 
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full md:w-2/5 flex justify-center md:justify-end"
-        >
-          <div className="relative group">
-            {/* Outer Glowing Ring */}
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-            
-            {/* Image Container */}
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl border border-gray-800 overflow-hidden shadow-2xl">
-              
-              {/* Subtle tint overlay to make the photo blend with the dark theme */}
-              <div className="absolute inset-0 bg-primary/10 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
-              
-              {/* The Actual Photo */}
-              <div className="relative w-full max-w-sm aspect-[4/5] overflow-hidden rounded-2xl">
-  <Image
-    src="/hero-profile.jpg"
-    alt="Janith Gayashan"
-    fill
-    priority
-    sizes="(max-width: 768px) 100vw, 33vw"
-    className="transition duration-700 group-hover:scale-105"
-    style={{ 
-      objectFit: 'cover', 
-      objectPosition: '50% 70%'
-    }}
-  />
-</div>
+        <div className="hero-portrait flex w-full justify-center md:w-2/5 md:justify-end">
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-primary to-secondary opacity-25 blur"
+            />
+            <div className="relative h-64 w-64 overflow-hidden rounded-2xl border border-gray-700 shadow-2xl sm:h-72 sm:w-72 lg:h-80 lg:w-80">
+              <Image
+                src="/hero-profile.jpg"
+                alt="Portrait of Janith Gayashan"
+                fill
+                preload
+                sizes="(min-width: 1024px) 320px, (min-width: 640px) 288px, 256px"
+                className="object-cover object-[50%_70%]"
+              />
             </div>
           </div>
-        </motion.div>
-
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { Pause, Play } from "lucide-react";
 
 const phrases = [
   "Machine Learning Systems",
@@ -31,7 +30,6 @@ export default function TypewriterHeadline() {
     getReducedMotion,
     getServerReducedMotion,
   );
-  const [paused, setPaused] = useState(false);
   const [frame, setFrame] = useState({
     wordIndex: 0,
     length: phrases[0].length,
@@ -41,7 +39,7 @@ export default function TypewriterHeadline() {
   const wordLength = phrases[wordIndex].length;
 
   useEffect(() => {
-    if (reducedMotion || paused) return;
+    if (reducedMotion) return;
 
     const delay = isDeleting
       ? length === wordLength
@@ -73,15 +71,14 @@ export default function TypewriterHeadline() {
     }, delay);
 
     return () => window.clearTimeout(timer);
-  }, [isDeleting, length, paused, reducedMotion, wordLength]);
+  }, [isDeleting, length, reducedMotion, wordLength]);
 
   const text = reducedMotion
     ? phrases[0]
     : phrases[wordIndex].slice(0, length);
-  const PlaybackIcon = paused ? Play : Pause;
 
   return (
-    <div className="mb-6 grid max-w-xl grid-cols-[minmax(0,1fr)_2.75rem] items-start gap-2 text-xl font-semibold sm:text-2xl md:text-3xl">
+    <div className="mb-6 max-w-xl text-xl font-semibold sm:text-2xl md:text-3xl">
       <span className="sr-only">
         Machine learning, AI workflows, and backend development.
       </span>
@@ -96,23 +93,13 @@ export default function TypewriterHeadline() {
           <span
             className={
               "ml-1 text-secondary " +
-              (!paused && !reducedMotion ? "motion-safe:animate-pulse" : "")
+              (!reducedMotion ? "motion-safe:animate-pulse" : "")
             }
           >
             |
           </span>
         </span>
       </span>
-      {!reducedMotion && (
-        <button
-          type="button"
-          onClick={() => setPaused((current) => !current)}
-          aria-label={paused ? "Resume headline animation" : "Pause headline animation"}
-          className="flex h-11 w-11 items-center justify-center rounded-lg text-secondary transition-colors hover:bg-surface"
-        >
-          <PlaybackIcon size={18} aria-hidden="true" focusable="false" />
-        </button>
-      )}
     </div>
   );
 }

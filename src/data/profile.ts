@@ -1,0 +1,51 @@
+export const profile = {
+  name: "Janith Gayashan",
+  role: "AI Engineer",
+  email: "janithgayashan9@gmail.com",
+  introduction:
+    "I build machine learning applications, AI workflows, and Python backends, with a focus on connecting models to useful web experiences.",
+  education: {
+    institution: "University of Moratuwa",
+    description: "Undergraduate specializing in Artificial Intelligence",
+  },
+  experience: {
+    role: "AI/ML Engineer Intern",
+    company: "Sri Lanka Telecom (SLT)",
+    start: "March 2025",
+    end: "September 2025",
+    contributions: [
+      "Developed an agentic AI assistant using LangGraph, FastAPI, and OpenAI APIs.",
+      "Built agent workflows for intent classification, personalization, and transactional tasks.",
+      "Worked on retrieval-augmented generation (RAG) and integration with MySQL and MongoDB.",
+    ],
+  },
+  skills: [
+    "Python",
+    "FastAPI",
+    "PyTorch",
+    "React",
+    "Next.js",
+    "MongoDB",
+    "MySQL",
+    "Docker",
+    "Java",
+    "C",
+    "JavaScript",
+    "TypeScript",
+    "Git",
+    "Tailwind CSS",
+  ],
+  specializations: [
+    "LangGraph",
+    "LangChain",
+    "OpenAI APIs",
+    "Scikit-learn",
+    "Explainable AI (XAI)",
+  ],
+  socials: {
+    github: "https://github.com/JanithGayashan",
+    linkedin: "https://www.linkedin.com/in/janith-gayashan/",
+    kaggle: "https://www.kaggle.com/janithgayashan",
+    huggingface: "https://huggingface.co/JanithGayashan",
+  },
+} as const;

@@ -61,7 +61,9 @@ export default function Home() {
 
         <section
           id="projects"
-          className="min-h-screen w-full flex items-center justify-center scroll-mt-24 bg-surface/30"
+          tabIndex={-1}
+          aria-labelledby="projects-heading"
+          className="w-full scroll-mt-20 bg-surface/30"
         >
           <Projects />
         </section>

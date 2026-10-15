@@ -1,6 +1,7 @@
 # Project content sources
 
-Reviewed on 2026-10-13. Homepage and case studies share `src/data/projects.ts`.
+Initial review: 2026-10-13. Insurance RAG refreshed on 2026-10-15.
+Homepage and case studies share `src/data/projects.ts`.
 Order: SL-Travel, research, ERPNext, insurance RAG, fraud detection, credit/loan risk.
 
 - **SL-Travel:** `public/Janith_CV.pdf`, Work Experience. The owner confirmed
@@ -25,10 +26,26 @@ Order: SL-Travel, research, ERPNext, insurance RAG, fraud detection, credit/loan
   LLM decisions, Redis/Pinecone use, and ERP writes are not completed features.
 - **Insurance RAG:**
   <https://github.com/JanithGayashan/insurance-rag-intelligence-platform>.
-  Reviewed README.md, src/chunking/semantic/embeddings.py, and repository tree.
-  Ingestion, validation, multiple chunkers, local BGE embeddings, and LlamaIndex
-  implementations exist. Retrieval, reranking, grounded generation, RAG
-  evaluation, and API deployment remain upcoming stages.
+  Refreshed against public `main` commit
+  `45964541aff3afac3b85b2ab66509e5338fdd4a8`, the local implementation,
+  and the latest project conversation. Reviewed README.md,
+  docs/embedding_pipeline_v2.md, docs/retrieval_evaluation.md,
+  src/indexing/embeddings.py, src/indexing/state.py,
+  src/retrieval/dense.py, indexing/evaluation workflow code, and the committed
+  evaluation/baselines/dense_bge_small_v2.json.
+  The implemented pipeline now includes normalized BGE embeddings, persistent
+  Qdrant cosine retrieval and metadata filters, incremental indexing, a SQLite
+  embedding cache, checkpoints/recovery, model-token limits, and source-grounded
+  retrieval evaluation. LlamaIndex remains part of the chunking experiments;
+  it does not yet orchestrate a generative query engine.
+  The recorded indexing acceptance run covers 11 policies and 812 prepared
+  records, with zero new embeddings and index writes on an unchanged rerun.
+  Evaluation uses 40 assistant-prepared source-checked questions. Labels remain
+  incomplete and await human approval; Recall@K is against annotated chunks,
+  and known-policy results must not be presented as unrestricted search quality.
+  Do not advertise the provisional metric percentages as production or
+  generated-answer accuracy. BM25, hybrid retrieval, reranking, LLM generation,
+  answer-quality evaluation, and service deployment remain planned work.
 - **Fraud:** <https://github.com/JanithGayashan/real-time-fraud-detection>.
   Reviewed README.md and source cells of
   notebooks/eda/01_dataset_understanding.ipynb. Current work is dataset
